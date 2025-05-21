@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from db.posts import get_posts
+from db.posts import *
 import os
 
 app = FastAPI()
@@ -21,3 +21,8 @@ async def root():
 async def list_post():
     posts = get_posts()
     return posts
+
+@app.get("/api/post/detail")
+async def detail_post(id: int):
+    post = get_post_by_id(id)
+    return post
